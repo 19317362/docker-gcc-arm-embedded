@@ -15,21 +15,26 @@ Use a sandbox instead of updating the state of your entire work machine and avoi
 Following are all the commands you should need to use this container. Note the --volume arguments, adjust your host path as needed.
 
 ```bash
+# build the image
 docker build --tag image-gccarm:v0.01 .
 
+# ceate a container, adjust --volume args
 docker create \
     --name mygccarm \
     --publish 8022:22 \
     --volume /home/wahoo/workspace/:/home/wahoo/workspace \
     image-gccarm:v0.01
 
+# start the container
 docker start mygccarm
 
+# ssh into it
 ssh -p 8022 wahoo@localhost
 
-
+# stop the container
 docker stop mygccarm
 
+# delete the container and image, if you don't need these anymore
 docker rm mygccarm
 docker rmi image-gccarm:v0.01
 ```
